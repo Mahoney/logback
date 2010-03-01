@@ -15,10 +15,10 @@ package ch.qos.logback.classic;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -71,7 +71,7 @@ public final class Logger implements org.slf4j.Logger, LocationAwareLogger,
   /**
    * The children of this logger. A logger may have zero or more children.
    */
-  private List<Logger> childrenList;
+  private Set<Logger> children;
 
   /**
    * It is assumed that once the 'aai' variable is set to a non-null value, it
@@ -126,6 +126,14 @@ public final class Logger implements org.slf4j.Logger, LocationAwareLogger,
   public String getName() {
     return name;
   }
+  
+  public Set<Logger> getChildLoggers() {
+	  return Collections.unmodifiableSet(children);
+  }
+  
+  public Logger getParentLogger() {
+	  return parent;
+  }
 
   private final boolean isRootLogger() {
     // only the root logger has a null parent
@@ -136,12 +144,10 @@ public final class Logger implements org.slf4j.Logger, LocationAwareLogger,
   // removed.
 
   Logger getChildByName(final String childName) {
-    if (childrenList == null) {
+    if (children == null) {
       return null;
     } else {
-      int len = this.childrenList.size();
-      for (int i = 0; i < len; i++) {
-        final Logger childLogger_i = (Logger) childrenList.get(i);
+      for (final Logger childLogger_i : children) {
         final String childName_i = childLogger_i.getName();
 
         if (childName.equals(childName_i)) {
@@ -169,10 +175,8 @@ public final class Logger implements org.slf4j.Logger, LocationAwareLogger,
       effectiveLevelInt = newLevel.levelInt;
     }
     
-    if (childrenList != null) {
-      int len = childrenList.size();
-      for (int i = 0; i < len; i++) {
-        Logger child = (Logger) childrenList.get(i);
+    if (children != null) {
+      for (final Logger child : children) {
         // tell child to handle parent levelInt change
         child.handleParentLevelChange(effectiveLevelInt);
       }
@@ -192,10 +196,8 @@ public final class Logger implements org.slf4j.Logger, LocationAwareLogger,
       effectiveLevelInt = newParentLevelInt;
 
       // propagate the parent levelInt change to this logger's children
-      if (childrenList != null) {
-        int len = childrenList.size();
-        for (int i = 0; i < len; i++) {
-          Logger child = (Logger) childrenList.get(i);
+      if (children != null) {
+        for (final Logger child : children) {
           child.handleParentLevelChange(newParentLevelInt);
         }
       }
@@ -331,8 +333,8 @@ public final class Logger implements org.slf4j.Logger, LocationAwareLogger,
           + CoreConstants.DOT + "]");
     }
 
-    if (childrenList == null) {
-      childrenList = new ArrayList<Logger>();
+    if (children == null) {
+      children = new HashSet<Logger>();
     }
     Logger childLogger;
     if (this.isRootLogger()) {
@@ -342,7 +344,7 @@ public final class Logger implements org.slf4j.Logger, LocationAwareLogger,
           name + CoreConstants.DOT + lastPart, this,
           this.loggerContext);
     }
-    childrenList.add(childLogger);
+    children.add(childLogger);
     childLogger.effectiveLevelInt = this.effectiveLevelInt;
     return childLogger;
   }
@@ -360,10 +362,10 @@ public final class Logger implements org.slf4j.Logger, LocationAwareLogger,
     detachAndStopAllAppenders();
     localLevelReset();
     additive = true;
-    if (childrenList == null) {
+    if (children == null) {
       return;
     }
-    for (Logger childLogger : childrenList) {
+    for (Logger childLogger : children) {
       childLogger.recursiveReset();
     }
   }
@@ -384,12 +386,12 @@ public final class Logger implements org.slf4j.Logger, LocationAwareLogger,
           + (this.name.length() + 1));
     }
 
-    if (childrenList == null) {
-      childrenList = new ArrayList<Logger>(DEFAULT_CHILD_ARRAY_SIZE);
+    if (children == null) {
+      children = new HashSet<Logger>(DEFAULT_CHILD_ARRAY_SIZE);
     }
     Logger childLogger;
     childLogger = new Logger(childName, this, this.loggerContext);
-    childrenList.add(childLogger);
+    children.add(childLogger);
     childLogger.effectiveLevelInt = this.effectiveLevelInt;
     return childLogger;
   }
