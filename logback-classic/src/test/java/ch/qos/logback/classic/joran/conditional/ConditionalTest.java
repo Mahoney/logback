@@ -67,7 +67,7 @@ public class ConditionalTest {
   public void conditionalConsoleApp_IF_THEN_True() throws JoranException,
       IOException, InterruptedException {
     InetAddress localhost = InetAddress.getLocalHost();
-    context.putProperty("aHost", localhost.getCanonicalHostName());
+    context.putProperty("aHost", localhost.getHostName());
 
     String configFileAsStr = ClassicTestConstants.JORAN_INPUT_PREFIX
         + "conditional/conditionalConsoleApp.xml";
