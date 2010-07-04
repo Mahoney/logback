@@ -14,6 +14,12 @@ a {
  text-decoration: underline;
 }
 
+.example {
+  width: 90%;
+  font-style: italic;
+}
+
+
 div.source {
  margin-top: 1em;
 }
@@ -25,7 +31,7 @@ div.source {
 .source, .command, .console { 
   border-top: 1px solid #DDDDDD;
   border-bottom: 1px solid #DDDDDD;
-  background:#eee;
+  background: #eee;
   font-family: Courier, "MS Courier New", Prestige, monospace;
   padding-left: 1ex;
   white-space: pre;
@@ -70,7 +76,7 @@ h2 {
 }
 
 h3 {
-  font-weight: normal;
+  font-weight: bold;
   font-size: large;
 }
 
@@ -213,8 +219,9 @@ table.bodyTable tr td p:first-child {
   font-weight: bold;	
 }
 
-code {
+.code {
 	font-family: Courier, monospace;
+ 	color: #666;	
 }
 
 .variable {

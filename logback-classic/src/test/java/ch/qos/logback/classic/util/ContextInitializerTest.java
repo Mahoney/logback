@@ -37,9 +37,9 @@ import ch.qos.logback.core.joran.spi.JoranException;
 import ch.qos.logback.core.status.StatusListener;
 import ch.qos.logback.core.status.TrivialStatusListener;
 
-public class InitializationTest {
+public class ContextInitializerTest {
 
-  org.slf4j.Logger logger = LoggerFactory.getLogger(InitializationTest.class);
+  org.slf4j.Logger logger = LoggerFactory.getLogger(ContextInitializerTest.class);
   LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
   Logger root = (Logger) LoggerFactory.getLogger("root");
 

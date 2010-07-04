@@ -22,6 +22,7 @@ import java.io.OutputStream;
  * @author Ceki G&uuml;lc&uuml;
  * @author Tom SH Liu
  * @author Ruediger Dohna
+ * @author David Roussel
  */
 public enum ConsoleTarget {
 
@@ -29,6 +30,14 @@ public enum ConsoleTarget {
     @Override
     public void write(int b) throws IOException {
       System.out.write(b);
+    }
+    @Override
+    public void write(byte b[]) throws IOException {
+      System.out.write(b);
+    }
+    @Override
+    public void write(byte b[], int off, int len) throws IOException {
+      System.out.write(b, off, len);
     }
     @Override
     public void flush() throws IOException {
@@ -40,6 +49,14 @@ public enum ConsoleTarget {
     @Override
     public void write(int b) throws IOException {
       System.err.write(b);
+    }
+    @Override
+    public void write(byte b[]) throws IOException {
+      System.err.write(b);
+    }
+    @Override
+    public void write(byte b[], int off, int len) throws IOException {
+      System.err.write(b, off, len);
     }
     @Override
     public void flush() throws IOException {

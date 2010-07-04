@@ -28,9 +28,62 @@
 
     <hr width="80%" align="center" />
 
-    <h3>April xx, 2010 - Release of version 0.9.21</h3>
+    <h3>June 30th, 2010 - Release of version 0.9.24</h3>
 
-    <p>SLF4J dependency upgraded to 1.6.0-RC0.</p>
+    <p>Fixed NullPointerException thrown by
+    <code>MDCBasedDiscriminator</code> in case the MDC map is
+    null.</p>
+
+    <p>Fixed issue with <code>SizeAndTimeBasedFNATP</code> in presence
+    of application stop/restart and non-null file proprety. This issue
+    was reported by Tom Liu in <a
+    href="http://jira.qos.ch/browse/LBCORE-131">LBCORE-131</a>.</p>
+
+    <hr width="80%" align="center" />
+
+    <h3>June 29th, 2010 - Release of version 0.9.23</h3>
+
+    <p>Fixed Groovy runtime dependency problem with
+    ReconfigureOnChangeFilter, i.e. the auto-scan filter, when using
+    non-groovy configuration files. This problem was reported in <a
+    href="http://jira.qos.ch/browse/LBCLASSIC-214">LBCLASSIC-214</a>
+    by Alvin Chee.</p>
+
+    <p>Fixed <code>MDCBasedDiscriminator</code> so that it supports deferred
+    processing. This issue was reported in <a
+    href="http://jira.qos.ch/browse/LBCLASSIC-213">LBCLASSIC-213</a>
+    by Torsten Juergeleit.</p>
+
+    <hr width="80%" align="center" />
+
+    <h3>June 21st, 2010 - Release of version 0.9.22</h3>
+
+    <p>Logback now supports <a href="manual/groovy.html">configuration
+    files written in Groovy</a> which are more convenient than
+    configuration files written in XML. We have also developed a tool
+    to <a
+    href="http://logback.qos.ch/translator/asGroovy.html">automatically
+    migrate your logback.xml files to logback.groovy</a>.
+    </p>
+
+    <p>Inspired by the functionality offered by
+    <code>SiftingAppender</code>, <code>SMTPApppender</code> now can
+    <a href="manual/appenders.html#smtpDiscriminator">track multiple
+    buffers according to selection information returned by a
+    discriminator</a>.
+    </p>
+
+    <p>Fixed synchronization issue in <code>ConsoleAppender</code> as
+    reported in <a
+    href="http://jira.qos.ch/browse/LBCORE-158">LBCORE-158</a> by
+    David Roussel who also supplied a corrective patch.</p>
+
+
+    <hr width="80%" align="center" />
+
+    <h3>May 8th, 2010 - Release of version 0.9.21</h3>
+
+    <p>SLF4J dependency upgraded to 1.6.0</p>
 
     <p>Fixed concurrency problem in <code>SiftingAppender</code> as
     reported in <a
@@ -38,6 +91,19 @@
     by Ellen Strnod.
     </p>
 
+    <p>Added <a
+    href="manual/filters.html#GEventEvaluator">GEventEvaluator</a>
+    which processes boolean expression written in the Groovy language.
+    </p>
+
+    <p>Fixed rollover problem occuring when the target directory was
+    missing as reported in <a
+    href="http://jira.qos.ch/browse/LBCORE-151">LBCORE-151</a> by
+    Torsten Juergeleit. A closely related problem was reported in <a
+    href="http://jira.qos.ch/browse/LBCLASSIC-167">LBCLASSIC-167</a>
+    by Rick Janda.
+    </p>
+    
 
     <hr width="80%" align="center" />
 
@@ -66,6 +132,8 @@
     href="http://jira.qos.ch/browse/LBCLASSIC-87">LBCLASSIC-87</a>.
     </p>
  
+    <p>Removed the previously deprecated <code>getFirstFilter</code>
+    method in <code>FilterAttachable</code> interface.</p>
 
     <!-- ============================================================== -->
 

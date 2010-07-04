@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import ch.qos.logback.core.Appender;
+import ch.qos.logback.core.CoreConstants;
 
 /**
  * Track appenders by a key. When an appender is not used for
@@ -62,7 +63,7 @@ public class AppenderTrackerImpl<E> implements AppenderTracker<E> {
 
   
   public synchronized void stopStaleAppenders(long now) {
-    if (lastCheck + MILLIS_IN_ONE_SECOND > now) {
+    if (lastCheck + CoreConstants.MILLIS_IN_ONE_SECOND > now) {
       return;
     }
     lastCheck = now;

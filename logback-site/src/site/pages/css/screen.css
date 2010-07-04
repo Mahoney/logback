@@ -28,6 +28,7 @@ p.menu {
  padding-bottom: 0px; 
  margin-top: 0px;
  margin-bottom: 0px;
+ font-size: smaller;
 }
 
 
@@ -113,3 +114,25 @@ p.menu_header {
 	margin-right: auto;
 	display: block;
 }
+
+span.asGroovy {
+   background: #fff; 
+   color: #0079C5;   
+   font-family: "Comic Sans MS", sans-serif;
+   white-space: nowrap;
+   font-size: 80%;
+
+   border-top:    2px solid #DDD;  
+   border-left:   2px solid #DDD;  
+   border-right:  2px solid #888;  
+   border-bottom: 2px solid #888;    
+   padding: 0px 1em 0px 1em;
+   margin:  -4px 4px 0 4px; 
+   float: right;
+}
+ 
+span.asGroovy:hover {
+   background: #E0E0EF;
+   cursor: pointer;
+}
+
